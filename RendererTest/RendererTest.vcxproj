@@ -18,6 +18,26 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Common.h" />
+    <ClInclude Include="Source\Math\Color.h" />
+    <ClInclude Include="Source\Math\Geometry.h" />
+    <ClInclude Include="Source\Math\Vector.h" />
+    <ClInclude Include="Source\Objects\FrameBuffer.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\RenderingPipeline\Pipeline.h" />
+    <ClInclude Include="Source\RenderingPipeline\Rasterizer.h" />
+    <ClInclude Include="Source\RenderingPipeline\VertexPostProcessor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Math\MathConstantSources.cpp" />
+    <ClCompile Include="Source\Objects\FrameBuffer.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\RenderingPipeline\Pipeline.cpp" />
+    <ClCompile Include="Source\RenderingPipeline\Rasterizer.cpp" />
+    <ClCompile Include="Source\RenderingPipeline\VertexPostProcessor.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{018254ED-653E-4463-AAB6-83400316AA1E}</ProjectGuid>
@@ -30,27 +50,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -72,25 +92,38 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Source;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)Intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Source;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)Intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Source;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)Intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\Source;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Output\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)Intermediate\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -99,13 +132,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,8 +148,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -123,6 +156,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,8 +168,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -142,6 +176,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,22 +186,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="RendererTest.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="RendererTest.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="RendererTest.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="RendererTest.ico" />
-    <Image Include="small.ico" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
